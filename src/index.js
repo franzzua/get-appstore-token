@@ -4,6 +4,7 @@ import Utils from './utils.js'
 async function run() {
   const utils = new Utils()
 
+  const scope = core.getInput('scope')
   const appId = core.getInput('app-id')
   const keyId = core.getInput('key-id')
   const issuerId = core.getInput('issuer-id')
@@ -17,7 +18,8 @@ async function run() {
     undefined,
     privateKeyRaw,
     privateKeyFilePath,
-    privateKeyFileBase64)
+    privateKeyFileBase64,
+    scope)
 
   core.setOutput(`token`, tokenString)
 }

@@ -4,7 +4,8 @@ import { messages } from './messages.js'
 
 export default class Token {
 
-  constructor(keyRaw, keyFile, keyFileBase64) {
+  constructor(keyRaw, keyFile, keyFileBase64, scope) {
+    this.scope = scope ?? 'GET /v1/apps/{appId}/appStoreVersions'
     if (!!keyRaw) {
       console.log(messages.using_raw_private_key)
       this.privateKey = keyRaw
@@ -27,8 +28,7 @@ export default class Token {
     const exp = '20m'
     const alg = 'ES256'
     const aud = 'appstoreconnect-v1'
-    const scope = `GET /v1/apps/${appId}/appStoreVersions`
-    const payload = { iss: issuerId, aud: aud, scope: [scope] }
+    const payload = { iss: issuerId, aud: aud, scope: [this.scope.replace('{appId}', appId)] }
     const jwtOptions = { expiresIn: exp, algorithm: alg, header: { kid: keyId } }
     return jwt.sign(payload, this.privateKey, jwtOptions)
   }

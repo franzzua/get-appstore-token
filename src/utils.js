@@ -7,7 +7,7 @@ export default class Utils {
     this.defaultLimit = 2
   }
 
-  getToken(appId, issuerId, keyId, jwt, pkRaw, pkFilePath, pkFileBase64) {
+  getToken(appId, issuerId, keyId, jwt, pkRaw, pkFilePath, pkFileBase64, scope) {
     if (!!jwt) {
       console.log(messages.predefined_jwt_set)
       return jwt
@@ -15,7 +15,7 @@ export default class Utils {
 
     console.log(messages.predefined_jwt_not_set)
     console.log(messages.setting_private_key)
-    const token = new Token(pkRaw, pkFilePath, pkFileBase64)
+    const token = new Token(pkRaw, pkFilePath, pkFileBase64, scope)
     console.log(messages.automatic_token_generation)
     return token.generate(appId, issuerId, keyId)
   }
