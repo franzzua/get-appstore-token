@@ -4,11 +4,17 @@ import Utils from './utils.js'
 async function run() {
   const utils = new Utils()
 
+  const appId = core.getInput('app-id')
+  const keyId = core.getInput('key-id')
+  const issuerId = core.getInput('issuer-id')
+  const privateKeyRaw = core.getInput('private-key-raw')
+  const privateKeyFilePath = core.getInput('private-key-p8-path')
+  const privateKeyFileBase64 = core.getInput('private-key-p8-base64')
   const tokenString = utils.getToken(
     appId,
     issuerId,
     keyId,
-    jsonWebToken,
+    undefined,
     privateKeyRaw,
     privateKeyFilePath,
     privateKeyFileBase64)
