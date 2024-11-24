@@ -29,8 +29,8 @@ inputs:
     required: false
     default: ''
 outputs:
-  token:
-    description: 'App Store Connect token'
+  version:
+    description: 'Last version'
 runs:
   using: 'node16'
   main: './src/index.js'

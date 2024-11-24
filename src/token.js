@@ -28,7 +28,9 @@ export default class Token {
     const exp = '20m'
     const alg = 'ES256'
     const aud = 'appstoreconnect-v1'
-    const payload = { iss: issuerId, aud: aud, scope: [this.scope.replace('{appId}', appId)] }
+    const payload = { iss: issuerId, aud: aud, scope: [
+        this.scope.replace('{appId}', appId)
+      ] }
     const jwtOptions = { expiresIn: exp, algorithm: alg, header: { kid: keyId } }
     return jwt.sign(payload, this.privateKey, jwtOptions)
   }

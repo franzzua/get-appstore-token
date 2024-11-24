@@ -1,10 +1,9 @@
-import core from '@actions/core'
+import * as core from "@actions/core";
 import Utils from './utils.js'
 
 async function run() {
   const utils = new Utils()
 
-  const scope = core.getInput('scope')
   const appId = core.getInput('app-id')
   const keyId = core.getInput('key-id')
   const issuerId = core.getInput('issuer-id')
@@ -19,9 +18,16 @@ async function run() {
     privateKeyRaw,
     privateKeyFilePath,
     privateKeyFileBase64,
-    scope)
+    'GET /v1/builds?filter[app]={appId}')
 
-  core.setOutput(`token`, tokenString)
+
+  const result = await fetch(`https://api.appstoreconnect.apple.com/v1/builds?filter[app]=${appId}`, {
+    headers: {
+      Authorization: `Bearer ${tokenString}`
+    }
+  }).then(x => x.json());
+  const version = Math.max(...result.data.map(x => x.attributes.version));
+  core.setOutput(`version`, version)
 }
 
 run()
