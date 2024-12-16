@@ -1,17 +1,5 @@
-// import * as core from "@actions/core";
+import * as core from "@actions/core";
 import Utils from './utils.js'
-
-const core = {
-  getInput(name){
-    return ({
-      'app-id': '6737245898',
-      'key-id': 'KN5DQZNJCK',
-      'issuer-id': '70404d9c-c471-42e1-849d-f266781d74c3',
-      'private-key-p8-path': '/home/fransua/Downloads/AuthKey_KN5DQZNJCK.p8'
-    })[name];
-  },
-  setOutput: console.log
-}
 
 async function run() {
   const utils = new Utils()
